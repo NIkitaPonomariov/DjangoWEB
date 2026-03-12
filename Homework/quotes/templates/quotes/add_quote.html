@@ -1,0 +1,27 @@
+<h2>Add Quote</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <p>
+        Quote text:
+        <textarea name="text"></textarea>
+    </p>
+
+    <p>
+        Author:
+        <select name="author">
+
+            {% for author in authors %}
+            <option value="{{ author.id }}">
+                {{ author.fullname }}
+            </option>
+            {% endfor %}
+
+        </select>
+    </p>
+
+    <button type="submit">Add Quote</button>
+
+</form>

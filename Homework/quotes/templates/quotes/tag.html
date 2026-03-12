@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tag</title>
+</head>
+
+<body>
+
+<h1>Quotes with tag: {{ tag }}</h1>
+
+{% for quote in quotes %}
+
+<p>{{ quote.text }}</p>
+<p><b>Author:</b> {{ quote.author.fullname }}</p>
+
+<hr>
+
+{% endfor %}
+
+</body>
+</html>

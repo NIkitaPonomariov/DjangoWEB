@@ -3,38 +3,48 @@
 <head>
     <title>Quotes</title>
 </head>
+
 <body>
 
 <h1>Quotes</h1>
 
+{% if user.is_authenticated %}
+<a href="/add/">Add quote</a>
+{% endif %}
+
 {% for quote in quotes %}
 
     <p>{{ quote.text }}</p>
-    <p><b>Author:</b> {{ quote.author.fullname }}</p>
+
+    <p>
+        <b>Author:</b> {{ quote.author.fullname }}
+    </p>
 
     <p>
         <b>Tags:</b>
 
-        {% for tag in quote.tags.all %}
-            {{ tag.name }}
+        {% for tag in quote.tag.all %}
+            <a href="/tag/{{ tag.tag }}/">{{ tag.tag }}</a>
         {% endfor %}
+
     </p>
 
     <hr>
 
 {% endfor %}
 
+
 <div>
 
-            {% if quotes.has_previous %}
-                <a href="?page={{ quotes.previous_page_number }}">Previous</a>
-            {% endif %}
+{% if quotes.has_previous %}
+<a href="?page={{ quotes.previous_page_number }}">Previous</a>
+{% endif %}
 
-        <span>Page {{ quotes.number }} of {{ quotes.paginator.num_pages }}</span>
+<span>Page {{ quotes.number }} of {{ quotes.paginator.num_pages }}</span>
 
-            {% if quotes.has_next %}
-                <a href="?page={{ quotes.next_page_number }}">Next</a>
-            {% endif %}
+{% if quotes.has_next %}
+<a href="?page={{ quotes.next_page_number }}">Next</a>
+{% endif %}
 
 </div>
 
