@@ -4,20 +4,29 @@ from .models import Quote
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Author
+from .models import Author, Tag
+from django.db.models import Count
 
 
 def main(request):
 
     quotes_list = Quote.objects.all()
 
-    paginator = Paginator(quotes_list, 5)   # 5 quotes per page
-
+    paginator = Paginator(quotes_list, 5)
     page_number = request.GET.get("page")
-
     quotes = paginator.get_page(page_number)
 
-    return render(request, "quotes/index.html", {"quotes": quotes})
+    top_tags = Tag.objects.annotate(num_quotes=Count('quote')).order_by('-num_quotes')[:10]
+
+    return render(
+        request,
+        "quotes/index.html",
+        {
+            "quotes": quotes,
+            "top_tags": top_tags
+        }
+    )
+
 
 def tag_search(request, tag_name):
 
@@ -45,6 +54,25 @@ def register(request):
 
     return render(request, "quotes/register.html", {"form": form})
 
+
+@login_required
+def add_author(request):
+    if request.method == "POST":
+        fullname = request.POST["fullname"]
+        born_date = request.POST["born_date"]
+        born_location = request.POST["born_location"]
+        description = request.POST["description"]
+
+        Author.objects.create(
+            fullname = fullname,
+            born_date = born_date,
+            born_location = born_location,
+            description = description
+        )
+        return redirect("main")
+    return render(request, "quotes/add_author.html")
+
+
 @login_required
 def add_quote(request):
 
@@ -69,3 +97,4 @@ def add_quote(request):
         "quotes/add_quote.html",
         {"authors": authors}
     )
+

@@ -19,5 +19,5 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('add/', views.add_quote, name='add_quote'),
 
-    path('accounts/', include('django.contrib.auth.urls')),  # ВАЖЛИВО
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
