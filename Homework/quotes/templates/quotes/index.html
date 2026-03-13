@@ -5,13 +5,14 @@
 </head>
 
 <body>
-
-<h1>Quotes</h1>
-
 {% if user.is_authenticated %}
-<a href="/add/">Add quote</a>
+<p>Logged as {{ user.username }}</p>
+<a href="/accounts/logout/">Logout</a>
+{% else %}
+<a href="/accounts/login/">Login</a>
+<a href="/register/">Register</a>
 {% endif %}
-
+<h1>Quotes</h1>
 {% for quote in quotes %}
 
     <p>{{ quote.text }}</p>
