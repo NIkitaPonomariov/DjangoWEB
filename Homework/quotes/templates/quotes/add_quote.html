@@ -15,17 +15,18 @@
 
 
 <h2> Author: </h2>
+
 <select name="author">
+
 {% for author in authors %}
-
 <option value="{{ author.id }}"> {{ author.fullname }} </option>
-
 {% endfor %}
+
 </select>
 
 
 
-<br><br>
+<br>
 <h2> Tags: </h2>
 <p> <input type="text" name="tags" placeholder="Tag"> </p>
 <button type="submit">Save Quote</button>

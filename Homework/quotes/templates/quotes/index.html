@@ -7,18 +7,18 @@
 <body>
 
 <h1>Quotes</h1>
-{% for quote in quotes%}
-<p><em>{{ quote.text }}</em></p>
 
-<p>
-    Author:
+<br>
+
+{% for quote in quotes%}
+<p> "" <strong><em>{{ quote.text }}</em></strong> "" </p>
+    Author: 
     <strong>{{ quote.author.fullname }}</strong>
-</p>
 
 <p>
     Tag: 
-    {% for tag in quote.tags.all %}
-    {{ tag.name }}
+    {% for tag  in quote.tags.all %}
+        {{ tag.tag }}
     {% endfor %}
 </p>
 
