@@ -10,10 +10,13 @@
 
     <form method="POST">
         {% csrf_token %}
-        <input name="fullname" placeholder="fullname">
-        <input name="born_date" placeholder="born date">
-        <input name="born_location" placeholder="born location">
-        <input name="description" placeholder="description">
+        <input name="fullname" placeholder="fullname" required>
+
+        <input name="born_date" placeholder="born date" required>
+
+        <input name="born_location" placeholder="born location" required>
+
+        <input name="description" placeholder="description" required maxlength="150">
 
         <button type="submit">SAVE</button>
 
