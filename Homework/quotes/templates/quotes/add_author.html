@@ -1,1 +1,22 @@
-<h1>AUTHOR</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Author</title>
+</head>
+<body>
+    <h1>Add Author</h1>
+    <h2>Here you can add Author</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input name="fullname" placeholder="fullname">
+        <input name="born_date" placeholder="born date">
+        <input name="born_location" placeholder="born location">
+        <input name="description" placeholder="description">
+
+        <button type="submit">SAVE</button>
+
+    </form>
+</body>
+</html>

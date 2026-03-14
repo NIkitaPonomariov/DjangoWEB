@@ -57,30 +57,27 @@ def register(request):
 
 #@login_required
 def add_author(request):
-
-    """if request.method == "POST":
-
-        name = request.POST.get("name")
+    if request.method == "POST":
+        fullname = request.POST.get("fullname")
         born_date = request.POST.get("born_date")
         born_location = request.POST.get("born_location")
         description = request.POST.get("description")
 
         Author.objects.create(
-            name=name,
-            born_date=born_date,
-            born_location=born_location,
-            description=description
-        )
-
-        return redirect("main")"""
-
+            fullname = fullname,
+            born_date = born_date,
+            born_location = born_location,
+            description = description
+            )
+        return redirect("main")
+        
     return render(request, "quotes/add_author.html")
 
-
+#@login_required
 def add_tag(request):
     if request.method == "POST":
         name = request.POST.get("name")
-        Tag.objects.create(name=name)
+        Tag.objects.create(tag=name)
         return redirect("main")
     return render(request, "quotes/add_tag.html")
 

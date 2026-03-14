@@ -9,6 +9,7 @@ class Author(models.Model):
 
     def __str__(self):
         return self.fullname
+
     
 class Tag(models.Model):
     tag = models.CharField(max_length=100)
