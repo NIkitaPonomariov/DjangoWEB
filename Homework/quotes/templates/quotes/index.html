@@ -1,77 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Quotes</title>
+    <meta charset="utf-8">
 </head>
-
 <body>
 
-{% if user.is_authenticated %}
-<p>Logged as {{ user.username }}</p>
-
-<form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-</form>
-
-<a href="/add/">Add Quote</a>
-
-{% else %}
-
-<a href="{% url 'login' %}">Login</a>
-<a href="/register/">Register</a>
-
-{% endif %}
-
-
-<h3>Top Tags</h3>
-
-<ul>
-{% for tag in top_tags %}
-<li>
-<a href="/tag/{{ tag.tag }}/">{{ tag.tag }}</a>
-</li>
-{% endfor %}
-
 <h1>Quotes</h1>
-{% for quote in quotes %}
+{% for quote in quotes%}
+<p><em>{{ quote.text }}</em></p>
 
+<p>
+    Author:
+    <strong>{{ quote.author.fullname }}</strong>
+</p>
 
-</ul>
-
-    <p>{{ quote.text }}</p>
-
-    <p>
-        <b>Author:</b> {{ quote.author.fullname }}
-    </p>
-
-    <p>
-        <b>Tags:</b>
-
-        {% for tag in quote.tag.all %}
-            <a href="/tag/{{ tag.tag }}/">{{ tag.tag }}</a>
-        {% endfor %}
-
-    </p>
-
-    <hr>
+<p>
+    Tag: 
+    {% for tag in quote.tags.all %}
+    {{ tag.name }}
+    {% endfor %}
+</p>
 
 {% endfor %}
 
-
-<div>
-
-{% if quotes.has_previous %}
-<a href="?page={{ quotes.previous_page_number }}">Previous</a>
-{% endif %}
-
-<span>Page {{ quotes.number }} of {{ quotes.paginator.num_pages }}</span>
-
-{% if quotes.has_next %}
-<a href="?page={{ quotes.next_page_number }}">Next</a>
-{% endif %}
-
-</div>
+<a href="{% url 'add_author' %}">
+    <button>Add Author</button>
+</a>
+<a href="{% url 'add_tag' %}">
+    <button>Add Tag</button>
+</a>
+<a href="{% url 'add_quote' %}">
+    <button>Add Quote</button>
+</a>
 
 </body>
+
 </html>

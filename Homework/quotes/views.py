@@ -55,38 +55,52 @@ def register(request):
     return render(request, "quotes/register.html", {"form": form})
 
 
-@login_required
+#@login_required
 def add_author(request):
-    if request.method == "POST":
-        fullname = request.POST["fullname"]
-        born_date = request.POST["born_date"]
-        born_location = request.POST["born_location"]
-        description = request.POST["description"]
+
+    """if request.method == "POST":
+
+        name = request.POST.get("name")
+        born_date = request.POST.get("born_date")
+        born_location = request.POST.get("born_location")
+        description = request.POST.get("description")
 
         Author.objects.create(
-            fullname = fullname,
-            born_date = born_date,
-            born_location = born_location,
-            description = description
+            name=name,
+            born_date=born_date,
+            born_location=born_location,
+            description=description
         )
-        return redirect("main")
+
+        return redirect("main")"""
+
     return render(request, "quotes/add_author.html")
 
 
-@login_required
+def add_tag(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        Tag.objects.create(name=name)
+        return redirect("main")
+    return render(request, "quotes/add_tag.html")
+
+
+#@login_required
 def add_quote(request):
 
     if request.method == "POST":
 
         text = request.POST.get("text")
         author_id = request.POST.get("author")
+        tag = request.POST.get("tag")
 
         author = Author.objects.get(id=author_id)
 
         quote = Quote.objects.create(
             text=text,
-            author=author
+            author=author,
         )
+    
 
         return redirect("/")
 
@@ -98,3 +112,7 @@ def add_quote(request):
         {"authors": authors}
     )
 
+
+def author_detail(request, id):
+    author = Author.objects.get(id=id)
+    return render(request, "quotes/author_detail.html", {"author": author})

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Tag</title>
+</head>
+<body>
+    <h1>Add Tag</h1>
+    <h2>Here you can add Tags</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input name="name" placeholder="Tag name">
+
+        <button type="submit">SAVE</button>
+
+    </form>
+</body>
+</html>
