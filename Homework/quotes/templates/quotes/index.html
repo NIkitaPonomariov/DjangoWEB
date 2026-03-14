@@ -10,7 +10,7 @@
 
 <br>
 
-{% for quote in quotes%}
+{% for quote in quotes %}
 <p> "" <strong><em>{{ quote.text }}</em></strong> "" </p>
     Author: 
     <strong>{{ quote.author.fullname }}</strong>
@@ -33,7 +33,6 @@
 <a href="{% url 'add_quote' %}">
     <button>Add Quote</button>
 </a>
-
 </body>
 
 </html>

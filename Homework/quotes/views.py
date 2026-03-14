@@ -18,9 +18,7 @@ def main(request):
 
     top_tags = Tag.objects.annotate(num_quotes=Count('quote')).order_by('-num_quotes')[:10]
 
-    return render(
-        request,
-        "quotes/index.html",
+    return render(request, "quotes/index.html",
         {
             "quotes": quotes,
             "top_tags": top_tags
