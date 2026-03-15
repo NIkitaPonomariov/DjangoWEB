@@ -5,28 +5,29 @@
     <meta charset="utf-8">
 </head>
 <body>
-    {% if user.is_authenticated %}
-    <p>Logged as {{ user. }}</p>
-    
-    <form action="/accounts/logout/" method="post">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-    {% else %}
 
-    <form action="/login/" method="get">
-        {% csrf_token %}
-        <button type="submit">Login</button>
-    </form>
+{% if user.is_authenticated %}
 
-    <form action="register/" method="get">
-        <button type="submit">Register</button>
-    </form>
-    {% endif %}
-    
+<p>Logged as {{ user.username }}</p>
+
+<form action="/accounts/logout/" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
+{% else %}
+
+<a href="/accounts/login/">
+    <button>Login</button>
+</a>
+
+<a href="/register/">
+    <button>Register</button>
+</a>
+
+{% endif %}
 
 <h1>Quotes</h1>
-
 <br>
 
 {% for quote in page_obj %}

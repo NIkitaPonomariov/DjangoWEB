@@ -111,3 +111,6 @@ def add_quote(request):
 def author_detail(request, id):
     author = Author.objects.get(id=id)
     return render(request, "quotes/author_detail.html", {"author": author})
+"""
+def login(request):
+    return render(request, "//login.html")"""
