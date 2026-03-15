@@ -10,7 +10,7 @@
 
 <br>
 
-{% for quote in quotes %}
+{% for quote in page_obj %}
 <p> "" <strong><em>{{ quote.text }}</em></strong> "" </p>
     Author: 
     <strong>{{ quote.author.fullname }}</strong>
@@ -34,5 +34,24 @@
     <button>Add Quote</button>
 </a>
 </body>
+<div>
+
+{% if page_obj.has_previous %}
+<a href="?page={{ page_obj.previous_page_number }}">
+Previous
+</a>
+{% endif %}
+
+<span>
+Page {{ page_obj.number }}
+</span>
+
+{% if page_obj.has_next %}
+<a href="?page={{ page_obj.next_page_number }}">
+Next
+</a>
+{% endif %}
+
+</div>
 
 </html>

@@ -14,13 +14,13 @@ def main(request):
 
     paginator = Paginator(quotes_list, 5)
     page_number = request.GET.get("page")
-    quotes = paginator.get_page(page_number)
+    page_obj = paginator.get_page(page_number)
 
     top_tags = Tag.objects.annotate(num_quotes=Count('quote')).order_by('-num_quotes')[:10]
 
     return render(request, "quotes/index.html",
         {
-            "quotes": quotes,
+            "page_obj": page_obj,
             "top_tags": top_tags
         }
     )
@@ -95,8 +95,8 @@ def add_quote(request):
             text=text,
             author=author,
         )
-    
-
+        tag,created = Tag.objects.get_or_create(tag=tag)
+        quote.tags.add(tag)
         return redirect("/")
 
     authors = Author.objects.all()
