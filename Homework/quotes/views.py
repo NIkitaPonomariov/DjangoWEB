@@ -53,7 +53,7 @@ def register(request):
     return render(request, "quotes/register.html", {"form": form})
 
 
-#@login_required
+@login_required
 def add_author(request):
     if request.method == "POST":
         fullname = request.POST.get("fullname")
@@ -71,7 +71,7 @@ def add_author(request):
         
     return render(request, "quotes/add_author.html")
 
-#@login_required
+@login_required
 def add_tag(request):
     if request.method == "POST":
         name = request.POST.get("name")
@@ -80,7 +80,7 @@ def add_tag(request):
     return render(request, "quotes/add_tag.html")
 
 
-#@login_required
+@login_required
 def add_quote(request):
 
     if request.method == "POST":
